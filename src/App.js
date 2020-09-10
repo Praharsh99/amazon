@@ -1,26 +1,72 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
 
-function App() {
+import { auth } from "./firebase/firebase";
+
+import { Switch, Route } from "react-router-dom";
+
+import Header from "./components/header/header.component";
+import Home from "./components/home/home.component";
+import Checkout from "./components/checkout/checkout.component";
+import Category from "./components/category/category.component";
+import Login from "./components/login/login.component";
+import Alert from "./components/alert/alert.component";
+
+import { setCurrentUser } from "./redux/user/user.actions";
+import { selectAlertObj } from "./redux/alert/alert.selectors";
+
+import "./App.css";
+
+function App({ setUser, alert }) {
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((userAuth) => {
+      if (userAuth && userAuth.emailVerified !== false) {
+        const { displayName, email, photoURL } = userAuth;
+
+        setUser({
+          displayName,
+          email,
+          photoURL,
+        });
+      } else {
+        setUser(null);
+      }
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Header />
+
+      <Switch>
+        <Route path="/login" component={Login} />
+        <Route path="/shop/:category" component={Category} />
+        <Route exact path="/checkout" component={Checkout} />
+        <Route path="/" component={Home} />
+      </Switch>
+
+      {alert && (
+        <Alert
+          message={alert.message}
+          submessage={alert.submessage}
+          type={alert.type}
+          position={alert?.position}
+        />
+      )}
     </div>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  alert: selectAlertObj(state),
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  setUser: (user) => dispatch(setCurrentUser(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

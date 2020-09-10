@@ -1,0 +1,116 @@
+.header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  background: #131921;
+  top: 0;
+  z-index: 100;
+}
+
+.header a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.header__logo {
+  width: 100px;
+  object-fit: contain;
+  margin: 0 20px;
+  margin-top: 18px;
+}
+
+.header__shopByCategory {
+  position: relative;
+  margin: 0 5px;
+}
+
+.header__shopByCategory > button {
+  padding: 4px 10px;
+  border: none;
+  outline: none;
+  text-transform: none;
+  background: transparent;
+  cursor: pointer;
+  color: #fff;
+  font-size: 14px;
+}
+
+.category__options {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  color: #000;
+  border-radius: 4px;
+  background: #fff;
+}
+
+.category__options a {
+  color: #000;
+}
+
+.category__options .MuiButtonBase-root {
+  padding: 10px 25px;
+  padding-right: 150px;
+  border-bottom: 1px solid lightgrey !important;
+}
+
+.category__options .MuiButtonBase-root:last-child {
+  border-bottom: none;
+}
+
+.header__search {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  border-radius: 24px;
+}
+
+.header__searchInput {
+  height: 30px;
+  padding: 10px;
+  border: none;
+  width: 100%;
+}
+
+.header__searchIcon {
+  padding: 5px;
+  height: 30px !important;
+  font-size: 30px !important;
+  background: #cd9042;
+}
+
+.header__nav {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.header__option {
+  display: flex;
+  flex-direction: column;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #fff;
+}
+
+.header__optionLineOne {
+  font-size: 10px;
+  color: #dddddd;
+  overflow: hidden;
+}
+
+.header__optionLineTwo {
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.header__optionBasket {
+  display: flex;
+  align-items: center;
+  color: #fff;
+}
+
+.header__basketCount {
+  margin: 0 10px;
+}
