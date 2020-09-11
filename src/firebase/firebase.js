@@ -79,4 +79,4 @@ export const signInUser = async (email, password) => {
   }
 };
 
-export { db, auth, signInWithGoogle };
+export { firebase, db, auth, signInWithGoogle };

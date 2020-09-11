@@ -3,6 +3,8 @@ import {
   addNewItemToCart,
   removeItemFromCart,
   clearItemFromCart,
+  populateCartItems,
+  emptyCart,
 } from "./cart.utils";
 
 const INITIAL_STATE = {
@@ -27,6 +29,18 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cartItems: clearItemFromCart(state.cartItems, action.payload),
+      };
+
+    case CartActionTypes.EMPTY_CART:
+      return {
+        ...state,
+        cartItems: emptyCart(),
+      };
+
+    case CartActionTypes.POPULATE_CART_ITEMS:
+      return {
+        ...state,
+        cartItems: populateCartItems(action.payload),
       };
 
     default:

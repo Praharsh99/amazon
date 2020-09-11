@@ -1,11 +1,14 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import { Button } from "@material-ui/core";
+
 import { addItemToCart } from "../../redux/cart/cart.actions";
+import { setAlert } from "../../redux/alert/alert.actions";
 
 import "./category-item.style.css";
 
-const CategoryItem = ({ id, otherProps, addNewItem }) => {
+const CategoryItem = ({ id, otherProps, addNewItem, setAlert }) => {
   const { title, price, image, rating } = otherProps;
 
   const handleClick = () => {
@@ -16,6 +19,23 @@ const CategoryItem = ({ id, otherProps, addNewItem }) => {
       image,
       rating,
     });
+
+    setAlert({
+      type: "success",
+      message: `Added ${
+        title.length > 62 ? `${title.substring(0, 64)}...` : title
+      } from cart`,
+      submessage: `$${price}`,
+      position: {
+        bottom: "10px",
+        right: "10px",
+        transform: "translateX(0)",
+      },
+    });
+
+    setTimeout(() => {
+      setAlert(null);
+    }, 10000);
   };
 
   return (
@@ -39,7 +59,7 @@ const CategoryItem = ({ id, otherProps, addNewItem }) => {
           </div>
         </div>
 
-        <button onClick={handleClick}>Add to basket</button>
+        <Button onClick={handleClick}>Add to basket</Button>
       </div>
     </div>
   );
@@ -47,6 +67,7 @@ const CategoryItem = ({ id, otherProps, addNewItem }) => {
 
 const mapDispatchToProps = (dispatch) => ({
   addNewItem: (item) => dispatch(addItemToCart(item)),
+  setAlert: (alert) => dispatch(setAlert(alert)),
 });
 
 export default connect(null, mapDispatchToProps)(CategoryItem);

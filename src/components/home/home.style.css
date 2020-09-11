@@ -7,15 +7,57 @@
   max-width: 1500px;
 }
 
+.home__container {
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+}
+
+.home__container img {
+  /* animation: fadeInCar 4s linear infinite; */
+}
+
 .home__image {
   width: 100%;
   z-index: -1;
   margin-bottom: -150px;
-  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
 }
 
 .home__row {
   display: flex;
   z-index: 1;
   margin: 0 5px;
+  position: relative;
+  top: -60px;
+}
+
+.home__row > div {
+  animation: fadeIn 0.3s linear;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  visibility: hidden;
+}
+
+@keyframes fadeIn {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  10% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInCar {
+  0% {
+    transform: scale(0.7);
+    opacity: 0;
+  }
+
+  5% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

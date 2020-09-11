@@ -10,6 +10,10 @@
   margin-bottom: 10px;
 }
 
+.checkout .checkout__emptyCartSvg {
+  margin-left: 36%;
+}
+
 .checkout__title {
   display: flex;
   align-items: center;

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import { auth } from "../../firebase/firebase";
 
@@ -9,6 +9,7 @@ import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { setCurrentUser } from "../../redux/user/user.actions";
 import { selectCartItems } from "../../redux/cart/cart.selectors";
 import { setAlert } from "../../redux/alert/alert.actions";
+import { setSearchQuery } from "../../redux/search/search.actions";
 
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
@@ -16,9 +17,16 @@ import { MenuItem, Button } from "@material-ui/core";
 
 import "./header.style.css";
 
-const Header = ({ cartItems, currentUser, setUser, setAlert }) => {
+const Header = ({
+  cartItems,
+  currentUser,
+  setUser,
+  setAlert,
+  setSearchQuery,
+}) => {
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
+  const history = useHistory();
 
   const getTotalItemsInCart = (cartItems) => {
     return cartItems.reduce((total, item) => (total += item.quantity), 0);
@@ -45,8 +53,11 @@ const Header = ({ cartItems, currentUser, setUser, setAlert }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (query.trim().length > 0) {
+      setSearchQuery(query.trim());
 
-    console.log(query);
+      history.push(`/search?q=${encodeURIComponent(query.trim())}`);
+    }
   };
 
   return (
@@ -122,10 +133,10 @@ const Header = ({ cartItems, currentUser, setUser, setAlert }) => {
           )}
         </div>
 
-        <div className="header__option">
+        <Link className="header__option" to="/orders">
           <span className="header__optionLineOne">Returns</span>
           <span className="header__optionLineTwo">& Orders</span>
-        </div>
+        </Link>
 
         <div className="header__option">
           <span className="header__optionLineOne">Your</span>
@@ -153,6 +164,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   setUser: (user) => dispatch(setCurrentUser(user)),
   setAlert: (alert) => dispatch(setAlert(alert)),
+  setSearchQuery: (query) => dispatch(setSearchQuery(query)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

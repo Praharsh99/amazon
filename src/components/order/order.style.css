@@ -1,0 +1,76 @@
+.order {
+  padding: 40px;
+  margin: 20px 0;
+  border: 1px solid lightgrey;
+  background: #fff;
+  position: relative;
+}
+
+.order__id {
+  position: absolute;
+  top: 40px;
+  right: 50px;
+}
+
+.order .cartItem {
+  margin-right: auto;
+  margin-left: auto;
+  width: 80%;
+}
+
+.order__deliveryStatus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  margin: 60px auto;
+  margin-bottom: 30px;
+}
+
+.order__deliveryStatus > div {
+  height: 2px;
+  position: relative;
+  flex: 1;
+  margin: 0 10px;
+  border-radius: 10px;
+  background: #dfdfdf;
+}
+
+.order__deliveryStatus-notif {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.order__deliveryStatus-notif > b {
+  position: absolute;
+  top: -120%;
+  left: -150%;
+  width: 115px;
+  font-size: 14px;
+  color: rgb(14, 224, 95);
+}
+
+.order__deliveryStatus > .div__status::before {
+  content: "";
+  background: rgb(18, 219, 78);
+  position: absolute;
+  height: 100%;
+  top: 0;
+  left: 0;
+  width: 30%;
+}
+
+.order__deliveryStatus-notif .MuiSvgIcon-root {
+  color: rgb(18, 219, 78);
+}
+
+.order__deliveryStatus > .MuiSvgIcon-root:last-child {
+  color: rgb(230, 208, 18);
+}
+
+.order__total {
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  padding: 10px 12px;
+}

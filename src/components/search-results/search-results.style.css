@@ -1,0 +1,17 @@
+.searchResults {
+  padding: 20px;
+}
+
+.searchResults > h2 {
+  margin-bottom: 30px;
+}
+
+.searchResults > h3 {
+  text-align: center;
+}
+
+.searchResults__noSearch {
+  width: 400px;
+  height: 500px;
+  margin-left: 32%;
+}

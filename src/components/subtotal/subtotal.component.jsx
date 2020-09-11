@@ -1,13 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 import CurrencyFormat from "react-currency-format";
 
+import { Button } from "@material-ui/core";
+
+import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { selectCartItems } from "../../redux/cart/cart.selectors";
+import { setAlert } from "../../redux/alert/alert.actions";
 
 import "./subtotal.style.css";
 
-const Subtotal = ({ cartItems }) => {
+const Subtotal = ({ cartItems, setAlert, currentUser }) => {
+  const history = useHistory();
+
   const getTotalItemsInCart = (cartItems) => {
     return cartItems.reduce((total, item) => (total += item.quantity), 0);
   };
@@ -17,6 +24,32 @@ const Subtotal = ({ cartItems }) => {
       (total, item) => (total += item.price * item.quantity),
       0
     );
+  };
+
+  const handleClick = () => {
+    if (getTotalItemsInCart(cartItems) > 0) {
+      if (currentUser) {
+        history.push("/payment");
+      } else {
+        setAlert({
+          type: "warning",
+          message: "Can't proceed! Please log in to place orders",
+        });
+
+        setTimeout(() => {
+          setAlert(null);
+        }, 5000);
+      }
+    } else {
+      setAlert({
+        type: "warning",
+        message: "Can't proceed! There are no items in the cart",
+      });
+
+      setTimeout(() => {
+        setAlert(null);
+      }, 5000);
+    }
   };
 
   return (
@@ -42,13 +75,18 @@ const Subtotal = ({ cartItems }) => {
         prefix={"$"}
       />
 
-      <button>Proceed to checkout</button>
+      <Button onClick={handleClick}>Proceed to checkout</Button>
     </div>
   );
 };
 
 const mapStateToProps = (state) => ({
   cartItems: selectCartItems(state),
+  currentUser: selectCurrentUser(state),
 });
 
-export default connect(mapStateToProps)(Subtotal);
+const mapDispatchToProps = (dispatch) => ({
+  setAlert: (alert) => dispatch(setAlert(alert)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Subtotal);

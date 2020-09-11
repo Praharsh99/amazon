@@ -1,5 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
+import { AnimatedList } from "react-animated-list";
+
+import { ReactComponent as EmptyCart } from "../../assets/empty_cart.svg";
 
 import Subtotal from "../subtotal/subtotal.component";
 import CartItem from "../cart-item/cart-item.component";
@@ -29,13 +32,23 @@ const Checkout = ({ cartItems, currentUser }) => {
           </h2>
 
           {cartItems.length ? (
-            cartItems.map(({ id, ...otherProps }) => (
-              <CartItem key={id} id={id} otherProps={otherProps} />
-            ))
+            <AnimatedList animation={"zoom"}>
+              {cartItems.map(({ id, ...otherProps }) => (
+                <CartItem key={id} id={id} otherProps={otherProps} />
+              ))}
+            </AnimatedList>
           ) : (
-            <h1 style={{ marginTop: "30px", textAlign: "center" }}>
-              No items here!
-            </h1>
+            <>
+              <h2 style={{ marginTop: "30px", textAlign: "center" }}>
+                No items in the cart! Go on, add some items and spend a little
+                for yourself
+              </h2>
+              <EmptyCart
+                className="checkout__emptyCartSvg"
+                width={300}
+                height={400}
+              />
+            </>
           )}
         </div>
       </div>
