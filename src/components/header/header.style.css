@@ -61,14 +61,20 @@
   display: flex;
   align-items: center;
   flex: 1;
-  border-radius: 24px;
 }
 
 .header__searchInput {
   height: 30px;
-  padding: 10px;
+  padding: 10px 15px;
   border: none;
   width: 100%;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.header__searchInput::placeholder {
+  color: rgb(150, 150, 150);
+  font-size: 12px;
 }
 
 .header__searchIcon {

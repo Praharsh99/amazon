@@ -1,3 +1,48 @@
 .app {
   margin-bottom: 20px;
 }
+
+.tour__lastButton {
+  text-transform: none !important;
+  padding: 4px 8px;
+}
+
+.tour__firstSlide {
+  color: #fff;
+}
+
+.tour__secondSlide > p {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.tour__madeWith {
+  color: #fff;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  word-wrap: break-word;
+}
+
+.tour__madeWith > p {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.tour__madeWith > p > .MuiSvgIcon-root {
+  margin: 0 6px;
+  font-size: 16px;
+}
+
+.tour__creatorLink {
+  font-size: 12px;
+  margin: 5px 0;
+  text-decoration: none;
+  color: #20b2d3;
+  margin-right: 8px;
+}
+
+div[data-tour-elem="controls"] {
+  margin-left: 20%;
+}

@@ -111,6 +111,7 @@ const Header = ({
           type="text"
           value={query}
           onChange={handleChange}
+          placeholder="Search for products, eg: Google. Try it! its working..."
           className="header__searchInput"
         />
         <SearchIcon className="header__searchIcon" />

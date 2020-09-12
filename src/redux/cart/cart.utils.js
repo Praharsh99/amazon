@@ -5,9 +5,9 @@ const updateFirestore = (cartItems) => {
 
   if (user) {
     db.collection("users")
-      .doc(user.uid)
+      .doc(user?.uid)
       .collection("cart")
-      .doc("OXhZbmxseXcR7kLCq0oS")
+      .doc(user?.uid)
       .set({ cartItems });
   }
 };

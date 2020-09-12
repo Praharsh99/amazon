@@ -11,6 +11,7 @@
   border-radius: 5px;
   transition: all 0.2s ease 0.1s;
   box-shadow: 0px 1px 1px 0px rgba(176, 176, 176, 1);
+  animation: fadeIn 0.3s linear;
 }
 
 .itemContainer:hover {
@@ -62,4 +63,16 @@
   margin-top: 10px;
   border-color: #a88734 #9c7e31 #846a29;
   color: #111;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
