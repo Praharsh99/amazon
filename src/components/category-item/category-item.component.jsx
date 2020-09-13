@@ -5,10 +5,11 @@ import { Button } from "@material-ui/core";
 
 import { addItemToCart } from "../../redux/cart/cart.actions";
 import { setAlert } from "../../redux/alert/alert.actions";
+import { selectDarkTheme } from "../../redux/theme/theme.selectors";
 
 import "./category-item.style.css";
 
-const CategoryItem = ({ id, otherProps, addNewItem, setAlert }) => {
+const CategoryItem = ({ id, otherProps, addNewItem, setAlert, isDarkMode }) => {
   const { title, price, image, rating } = otherProps;
 
   const handleClick = () => {
@@ -39,7 +40,7 @@ const CategoryItem = ({ id, otherProps, addNewItem, setAlert }) => {
   };
 
   return (
-    <div className="itemContainer">
+    <div className={`itemContainer ${isDarkMode && "itemContainer--dark"}`}>
       <img src={image} alt={title} />
 
       <div className="itemContainer__info">
@@ -65,9 +66,13 @@ const CategoryItem = ({ id, otherProps, addNewItem, setAlert }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  isDarkMode: selectDarkTheme(state),
+});
+
 const mapDispatchToProps = (dispatch) => ({
   addNewItem: (item) => dispatch(addItemToCart(item)),
   setAlert: (alert) => dispatch(setAlert(alert)),
 });
 
-export default connect(null, mapDispatchToProps)(CategoryItem);
+export default connect(mapStateToProps, mapDispatchToProps)(CategoryItem);

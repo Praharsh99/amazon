@@ -43,6 +43,6 @@
   margin-right: 8px;
 }
 
-div[data-tour-elem="controls"] {
-  margin-left: 20%;
+button[data-tour-elem="left-arrow"] {
+  display: none;
 }

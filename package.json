@@ -17,6 +17,7 @@
     "react": "^16.13.1",
     "react-animated-list": "^0.1.4",
     "react-currency-format": "^1.0.0",
+    "react-dark-mode-toggle": "0.0.9",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",

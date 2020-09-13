@@ -9,12 +9,13 @@ import CartItem from "../cart-item/cart-item.component";
 
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { selectCartItems } from "../../redux/cart/cart.selectors";
+import { selectDarkTheme } from "../../redux/theme/theme.selectors";
 
 import "./checkout.style.css";
 
-const Checkout = ({ cartItems, currentUser }) => {
+const Checkout = ({ cartItems, currentUser, isDarkMode }) => {
   return (
-    <div className="checkout">
+    <div className={`checkout ${isDarkMode && "checkout--dark"}`}>
       <div className="checkout__left">
         <img
           className="checkout__ad"
@@ -63,6 +64,7 @@ const Checkout = ({ cartItems, currentUser }) => {
 const mapStateToProps = (state) => ({
   currentUser: selectCurrentUser(state),
   cartItems: selectCartItems(state),
+  isDarkMode: selectDarkTheme(state),
 });
 
 export default connect(mapStateToProps)(Checkout);

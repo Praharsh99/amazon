@@ -18,12 +18,19 @@ import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { selectCartItems } from "../../redux/cart/cart.selectors";
 import { emptyCart } from "../../redux/cart/cart.actions";
 import { setAlert } from "../../redux/alert/alert.actions";
+import { selectDarkTheme } from "../../redux/theme/theme.selectors";
 
 import { Button } from "@material-ui/core";
 
 import "./payment.style.css";
 
-const Payment = ({ currentUser, cartItems, emptyCart, setAlert }) => {
+const Payment = ({
+  currentUser,
+  cartItems,
+  emptyCart,
+  setAlert,
+  isDarkMode,
+}) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -110,7 +117,7 @@ const Payment = ({ currentUser, cartItems, emptyCart, setAlert }) => {
   console.log(clientSecret);
 
   return (
-    <div className="payment">
+    <div className={`payment ${isDarkMode && "payment--dark"}`}>
       <div className="payment__container">
         <h1>
           Checkout (<Link to="/checkout">{cartItems?.length} items</Link>)
@@ -191,6 +198,7 @@ const Payment = ({ currentUser, cartItems, emptyCart, setAlert }) => {
 const mapStateToProps = (state) => ({
   currentUser: selectCurrentUser(state),
   cartItems: selectCartItems(state),
+  isDarkMode: selectDarkTheme(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

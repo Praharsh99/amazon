@@ -9,10 +9,11 @@ import { db } from "../../firebase/firebase";
 import Order from "../order/order.component";
 
 import { selectCurrentUser } from "../../redux/user/user.selectors";
+import { selectDarkTheme } from "../../redux/theme/theme.selectors";
 
 import "./orders.style.css";
 
-const Orders = ({ currentUser }) => {
+const Orders = ({ currentUser, isDarkMode }) => {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const Orders = ({ currentUser }) => {
   }, [currentUser]);
 
   return (
-    <div className="orders">
+    <div className={`orders ${isDarkMode && "orders--dark"}`}>
       <h1>Your orders</h1>
 
       <div className="orders__order">
@@ -58,6 +59,7 @@ const Orders = ({ currentUser }) => {
 
 const mapStateToProps = (state) => ({
   currentUser: selectCurrentUser(state),
+  isDarkMode: selectDarkTheme(state),
 });
 
 export default connect(mapStateToProps)(Orders);

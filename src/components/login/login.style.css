@@ -3,15 +3,20 @@
   flex-direction: column;
   align-items: center;
   height: 100vh;
+  transition: all 0.2s ease;
 }
 
 .login__logo {
-  margin-top: 20px;
+  margin-top: 40px;
   margin-bottom: 20px;
   object-fit: contain;
-  width: 100px;
+  width: 140px;
   margin-right: auto;
   margin-left: auto;
+}
+
+.login__logo--dark {
+  filter: invert(100%);
 }
 
 .login__container {

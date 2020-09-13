@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 
 import CurrencyFormat from "react-currency-format";
 import moment from "moment";
@@ -9,11 +10,13 @@ import RadioButtonUncheckedIcon from "@material-ui/icons/RadioButtonUnchecked";
 
 import CartItem from "../cart-item/cart-item.component";
 
+import { selectDarkTheme } from "../../redux/theme/theme.selectors";
+
 import "./order.style.css";
 
-const Order = ({ order }) => {
+const Order = ({ order, isDarkMode }) => {
   return (
-    <div className="order">
+    <div className={`order ${isDarkMode && "order--dark"}`}>
       <h2>Order</h2>
       <br />
       <p>{moment.unix(order.data.created).format("MMMM Do YYYY, h:mma")}</p>
@@ -68,4 +71,8 @@ const Order = ({ order }) => {
   );
 };
 
-export default Order;
+const mapStateToProps = (state) => ({
+  isDarkMode: selectDarkTheme(state),
+});
+
+export default connect(mapStateToProps)(Order);

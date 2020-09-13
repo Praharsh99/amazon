@@ -5,6 +5,7 @@ import { Link, useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
 
 import { setAlert } from "../../redux/alert/alert.actions";
+import { selectDarkTheme } from "../../redux/theme/theme.selectors";
 
 import {
   createAccountWithEmailAndPassword,
@@ -14,7 +15,7 @@ import {
 
 import "./login.style.css";
 
-const Login = ({ setAlert }) => {
+const Login = ({ setAlert, isDarkMode }) => {
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
@@ -142,7 +143,7 @@ const Login = ({ setAlert }) => {
     <div className="login">
       <Link to="/">
         <img
-          className="login__logo"
+          className={`login__logo ${isDarkMode && "login__logo--dark"}`}
           src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a9/Amazon_logo.svg/1024px-Amazon_logo.svg.png"
           alt="Logo"
         />
@@ -210,8 +211,12 @@ const Login = ({ setAlert }) => {
   );
 };
 
+const mapStateToProps = (state) => ({
+  isDarkMode: selectDarkTheme(state),
+});
+
 const mapDispatchToProps = (dispatch) => ({
   setAlert: (alert) => dispatch(setAlert(alert)),
 });
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

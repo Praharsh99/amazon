@@ -9,10 +9,11 @@ import { Button } from "@material-ui/core";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 import { selectCartItems } from "../../redux/cart/cart.selectors";
 import { setAlert } from "../../redux/alert/alert.actions";
+import { selectDarkTheme } from "../../redux/theme/theme.selectors";
 
 import "./subtotal.style.css";
 
-const Subtotal = ({ cartItems, setAlert, currentUser }) => {
+const Subtotal = ({ cartItems, setAlert, currentUser, isDarkMode }) => {
   const history = useHistory();
 
   const getTotalItemsInCart = (cartItems) => {
@@ -53,7 +54,7 @@ const Subtotal = ({ cartItems, setAlert, currentUser }) => {
   };
 
   return (
-    <div className="subtotal">
+    <div className={`subtotal ${isDarkMode && "subtotal--dark"}`}>
       <CurrencyFormat
         renderText={(value) => (
           <>
@@ -83,6 +84,7 @@ const Subtotal = ({ cartItems, setAlert, currentUser }) => {
 const mapStateToProps = (state) => ({
   cartItems: selectCartItems(state),
   currentUser: selectCurrentUser(state),
+  isDarkMode: selectDarkTheme(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

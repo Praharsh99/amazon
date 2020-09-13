@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import DarkModeToggle from "react-dark-mode-toggle";
 
 import { Link, useHistory } from "react-router-dom";
 
@@ -10,6 +11,8 @@ import { setCurrentUser } from "../../redux/user/user.actions";
 import { selectCartItems } from "../../redux/cart/cart.selectors";
 import { setAlert } from "../../redux/alert/alert.actions";
 import { setSearchQuery } from "../../redux/search/search.actions";
+import { setThemeDarkMode } from "../../redux/theme/theme.actions";
+import { selectDarkTheme } from "../../redux/theme/theme.selectors";
 
 import SearchIcon from "@material-ui/icons/Search";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
@@ -23,6 +26,8 @@ const Header = ({
   setUser,
   setAlert,
   setSearchQuery,
+  isDarkMode,
+  setThemeDarkMode,
 }) => {
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -34,6 +39,14 @@ const Header = ({
 
   const handleChange = (e) => {
     setQuery(e.target.value);
+  };
+
+  const handleThemeChange = () => {
+    isDarkMode
+      ? document.body.removeAttribute("style")
+      : (document.body.style.backgroundColor = "#121212");
+
+    setThemeDarkMode();
   };
 
   const handleClick = (e) => {
@@ -61,7 +74,7 @@ const Header = ({
   };
 
   return (
-    <div className="header">
+    <div className={`header ${isDarkMode && "header--dark"}`}>
       <Link to="/">
         <img
           className="header__logo"
@@ -140,8 +153,11 @@ const Header = ({
         </Link>
 
         <div className="header__option">
-          <span className="header__optionLineOne">Your</span>
-          <span className="header__optionLineTwo">Prime</span>
+          <DarkModeToggle
+            onChange={handleThemeChange}
+            checked={isDarkMode}
+            size={60}
+          />
         </div>
 
         <Link to="/checkout">
@@ -160,12 +176,14 @@ const Header = ({
 const mapStateToProps = (state) => ({
   currentUser: selectCurrentUser(state),
   cartItems: selectCartItems(state),
+  isDarkMode: selectDarkTheme(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
   setUser: (user) => dispatch(setCurrentUser(user)),
   setAlert: (alert) => dispatch(setAlert(alert)),
   setSearchQuery: (query) => dispatch(setSearchQuery(query)),
+  setThemeDarkMode: () => dispatch(setThemeDarkMode()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

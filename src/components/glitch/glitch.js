@@ -26,14 +26,12 @@ const anim2 = keyframes`${doKeyframes()}`;
 export default styled.div`
   font-size: 3em;
   position: relative;
-  text-align: center;
   font-family: ${fontFamily}
   
   &:after {
     content: attr(data-glitch);
     position: absolute;
-    left: 10px;
-    text-align: center;
+    left: 0px;
     text-shadow: -1px 0 red;
     top: 0;
     color: white;

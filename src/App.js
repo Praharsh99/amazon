@@ -10,6 +10,8 @@ import { auth, db } from "./firebase/firebase";
 
 import { Switch, Route, Link } from "react-router-dom";
 
+import history from "./history/history";
+
 import Header from "./components/header/header.component";
 import Home from "./components/home/home.component";
 import Checkout from "./components/checkout/checkout.component";
@@ -232,6 +234,9 @@ const steps = [
         <p>{" 🥼 🥾 🎩 ⚽ 💻 📒 ✂ "}</p>
       </div>
     ),
+    action: () => {
+      history.push("/shop/hats");
+    },
   },
   {
     selector: ".category__filterOptions",
@@ -246,7 +251,6 @@ const steps = [
     selector: ".header__optionBasket",
     content: ({ goTo }) => (
       <div>
-        <p></p>
         <Link to="/checkout" style={{ textDecoration: "none" }}>
           <p>
             Here's your cart! You can go to your cart by clicking this button

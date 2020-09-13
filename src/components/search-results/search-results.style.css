@@ -2,6 +2,10 @@
   padding: 20px;
 }
 
+.searchResults--dark {
+  color: #fff;
+}
+
 .searchResults > h2 {
   margin-bottom: 30px;
 }

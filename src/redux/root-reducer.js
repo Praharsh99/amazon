@@ -5,6 +5,7 @@ import cartReducer from "./cart/cart.reducer";
 import shopReducer from "./shop/shop.reducer";
 import alertReducer from "./alert/alert.reducer";
 import searchReducer from "./search/search.reducer";
+import themeReducer from "./theme/theme.reducer";
 
 export default combineReducers({
   user: userReducer,
@@ -12,4 +13,5 @@ export default combineReducers({
   shop: shopReducer,
   alert: alertReducer,
   search: searchReducer,
+  theme: themeReducer,
 });

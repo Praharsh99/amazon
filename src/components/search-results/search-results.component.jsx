@@ -9,6 +9,7 @@ import CategoryItem from "../category-item/category-item.component";
 
 import { selectShopItems } from "../../redux/shop/shop.selectors";
 import { selectQuery } from "../../redux/search/search.selectors";
+import { selectDarkTheme } from "../../redux/theme/theme.selectors";
 
 import "./search-results.style.css";
 
@@ -26,7 +27,7 @@ const getItemsBasedOnQuery = (shopItems, query) => {
   return results;
 };
 
-const SearchResults = ({ shopItems, query }) => {
+const SearchResults = ({ shopItems, query, isDarkMode }) => {
   const [results, setResults] = useState([]);
 
   useEffect(() => {
@@ -34,7 +35,7 @@ const SearchResults = ({ shopItems, query }) => {
   }, [query]);
 
   return (
-    <div className="searchResults">
+    <div className={`searchResults ${isDarkMode && "searchResults--dark"}`}>
       <h2>Results Based on your search</h2>
 
       {results.length > 0 ? (
@@ -56,6 +57,7 @@ const SearchResults = ({ shopItems, query }) => {
 const mapStateToProps = (state) => ({
   shopItems: selectShopItems(state),
   query: selectQuery(state),
+  isDarkMode: selectDarkTheme(state),
 });
 
 export default connect(mapStateToProps)(SearchResults);

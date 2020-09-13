@@ -11,6 +11,7 @@ import {
   clearItemFromCart,
 } from "../../redux/cart/cart.actions";
 import { setAlert } from "../../redux/alert/alert.actions";
+import { selectDarkTheme } from "../../redux/theme/theme.selectors";
 
 import "./cart-item.style.css";
 
@@ -22,6 +23,7 @@ const CartItem = ({
   id,
   otherProps,
   hideButton,
+  isDarkMode,
 }) => {
   const { price, image, rating, title, quantity } = otherProps;
   const item = {
@@ -34,7 +36,7 @@ const CartItem = ({
   };
 
   return (
-    <div className="cartItem">
+    <div className={`cartItem ${isDarkMode && "cartItem--dark"}`}>
       <img src={image} alt={title} />
 
       <div className="cartItem__info">
@@ -101,6 +103,10 @@ const CartItem = ({
   );
 };
 
+const mapStateToProps = (state) => ({
+  isDarkMode: selectDarkTheme(state),
+});
+
 const mapDispatchToProps = (dispatch) => ({
   addItem: (item) => dispatch(addItemToCart(item)),
   removeItem: (item) => dispatch(removeItemFromCart(item)),
@@ -108,4 +114,4 @@ const mapDispatchToProps = (dispatch) => ({
   setAlert: (alert) => dispatch(setAlert(alert)),
 });
 
-export default connect(null, mapDispatchToProps)(CartItem);
+export default connect(mapStateToProps, mapDispatchToProps)(CartItem);

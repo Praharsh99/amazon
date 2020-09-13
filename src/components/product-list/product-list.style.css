@@ -6,6 +6,17 @@
   margin-top: 5px;
 }
 
+.productList--dark .category__filterOptions {
+  color: #fff;
+  background: #333;
+  border: 1px solid rgb(24, 23, 23);
+}
+
+.productList--dark .category__filterOptions button {
+  color: #fff;
+  background: #0c78d1;
+}
+
 .productList__ad {
   display: flex;
   width: 90%;

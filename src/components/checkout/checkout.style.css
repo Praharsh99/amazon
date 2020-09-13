@@ -5,8 +5,13 @@
   height: max-content;
 }
 
+.checkout--dark {
+  background: #121212 !important;
+  color: #fff !important;
+}
+
 .checkout__ad {
-  width: 100%;
+  width: 98%;
   margin-bottom: 10px;
 }
 

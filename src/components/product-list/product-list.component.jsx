@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import { AnimatedList } from "react-animated-list";
 
-import { Button } from "@material-ui/core";
-
 import CategoryItem from "../category-item/category-item.component";
 
 import { selectShopItems } from "../../redux/shop/shop.selectors";
+import { selectDarkTheme } from "../../redux/theme/theme.selectors";
 
 import "./product-list.style.css";
 
@@ -18,17 +17,15 @@ const sortFunctions = {
   highLow: (a, b) => b.price - a.price,
 };
 
-const ProductList = ({ shopItems, category }) => {
+const ProductList = ({ shopItems, category, isDarkMode }) => {
   const [filterBy, setFilterBy] = useState("alphabetical");
 
   const handleClick = (e) => {
     setFilterBy(e.target.id);
   };
 
-  // useEffect(() => {}, [filterBy, setFilterBy]);
-
   return (
-    <div className="productList">
+    <div className={`productList ${isDarkMode && "productList--dark"}`}>
       <div className="productList__ad">
         {shopItems[category].ad.map((ad, idx) => (
           <img key={idx * 10} src={ad} alt="Ad" />
@@ -66,6 +63,7 @@ const ProductList = ({ shopItems, category }) => {
 
 const mapStateToProps = (state) => ({
   shopItems: selectShopItems(state),
+  isDarkMode: selectDarkTheme(state),
 });
 
 export default connect(mapStateToProps)(ProductList);
